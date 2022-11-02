@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+const validationExpression =
+  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -14,8 +16,11 @@ export class RegisterComponent {
     Validators.min(18),
     Validators.max(120),
   ]);
-  password = new FormControl('');
-  confirm_password = new FormControl('');
+  password = new FormControl('', [
+    Validators.required,
+    Validators.pattern(validationExpression),
+  ]);
+  confirm_password = new FormControl('', [Validators.required]);
   phoneNumber = new FormControl('');
 
   registerForm = new FormGroup({
