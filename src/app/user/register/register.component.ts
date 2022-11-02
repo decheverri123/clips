@@ -21,7 +21,11 @@ export class RegisterComponent {
     Validators.pattern(validationExpression),
   ]);
   confirm_password = new FormControl('', [Validators.required]);
-  phoneNumber = new FormControl('');
+  phoneNumber = new FormControl('', [
+    Validators.required,
+    Validators.minLength(13),
+    Validators.maxLength(13),
+  ]);
 
   registerForm = new FormGroup({
     name: this.name,
@@ -29,6 +33,9 @@ export class RegisterComponent {
     age: this.age,
     password: this.password,
     confirm_password: this.confirm_password,
-    phoneNumber: this.phoneNumber,
   });
+
+  register() {
+    console.log('registered');
+  }
 }
