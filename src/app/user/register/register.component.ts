@@ -35,7 +35,13 @@ export class RegisterComponent {
     confirm_password: this.confirm_password,
   });
 
+  alertMessage = 'Please wait. Your account is being created.';
+  showAlert = false;
+  alertColor = 'blue';
+
   register() {
-    console.log('registered');
+    this.showAlert = true;
+    this.alertMessage = 'Please wait. Your account is being created.';
+    this.alertColor = 'blue';
   }
 }
