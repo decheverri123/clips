@@ -10,4 +10,7 @@
     Name must be
     {{ control.errors?.minlength.requiredLength }} or more characters long.
   </p>
+  <p class="text-red-400" *ngIf="control.errors?.email">Enter a valid email.</p>
+  <p class="text-red-400" *ngIf="control.errors?.min">Age too low.</p>
+  <p class="text-red-400" *ngIf="control.errors?.max">Age too high.</p>
 </ng-container>
