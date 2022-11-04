@@ -32,14 +32,12 @@
       required
       placeholder="Password"
       [(ngModel)]="credentials.password"
-      pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
     />
     <p
       class="text-red-400"
       *ngIf="password.errors && password.touched && password.dirty"
     >
-      Password must be at least 8 character long, contain 1 uppercase letter, 1
-      lowercase letter, and 1 number.
+      You must provide a password.
     </p>
   </div>
 
