@@ -44,7 +44,7 @@
   <button
     type="submit"
     class="disabled:opacity-50 bg-indigo-400 text-white py-1.5 px-3 rounded transition disabled:bg-indigo-400"
-    [disabled]="registerForm.invalid"
+    [disabled]="registerForm.invalid || inSubmission"
   >
     Submit
   </button>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 const validationExpression =
   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
@@ -9,6 +10,10 @@ const validationExpression =
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
+  constructor(private auth: AngularFireAuth) {}
+
+  inSubmission = false;
+
   name = new FormControl('', [Validators.required, Validators.minLength(3)]);
   email = new FormControl('', [Validators.email, Validators.required]);
   age = new FormControl('', [
@@ -39,9 +44,28 @@ export class RegisterComponent {
   showAlert = false;
   alertColor = 'blue';
 
-  register() {
+  async register() {
     this.showAlert = true;
     this.alertMessage = 'Please wait. Your account is being created.';
     this.alertColor = 'blue';
+    this.inSubmission = true;
+    const { email, password } = this.registerForm.value;
+
+    try {
+      const userCred = await this.auth.createUserWithEmailAndPassword(
+        email as string,
+        password as string
+      );
+      console.log(userCred);
+    } catch (error) {
+      console.log(error);
+      this.alertMessage = 'Unexpected error occurred.';
+      this.alertColor = 'red';
+      this.inSubmission = false;
+      return;
+    }
+
+    this.alertMessage = 'Your account has been created.';
+    this.alertColor = 'green';
   }
 }
