@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "clips-50485": {
+      "hosting": {
+        "clips": [
+          "clips-50485"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "clips-50485"
+  }
+}
