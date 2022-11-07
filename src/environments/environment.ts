@@ -8,10 +8,9 @@ export const environment = {
     authDomain: 'clips-50485.firebaseapp.com',
     projectId: 'clips-50485',
     storageBucket: 'clips-50485.appspot.com',
-    messagingSenderId: '645673416129',
     appId: '1:645673416129:web:0a4dd865aecb911c72ab40',
   },
-  production: false,
+  production: true,
 };
 
 /*
