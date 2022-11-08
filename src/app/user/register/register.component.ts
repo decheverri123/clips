@@ -14,7 +14,6 @@ export class RegisterComponent {
   constructor(private auth: AuthService) {}
 
   inSubmission = false;
-
   name = new FormControl('', [Validators.required, Validators.minLength(3)]);
   email = new FormControl('', [Validators.email, Validators.required]);
   age = new FormControl<number | null>(null, [
