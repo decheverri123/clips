@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import IUser from '../../models/user.model';
+import { RegisterValidators } from '../validators/register-validators';
 
 const validationExpression =
   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
@@ -32,13 +33,16 @@ export class RegisterComponent {
     Validators.maxLength(13),
   ]);
 
-  registerForm = new FormGroup({
-    name: this.name,
-    email: this.email,
-    age: this.age,
-    password: this.password,
-    confirm_password: this.confirm_password,
-  });
+  registerForm = new FormGroup(
+    {
+      name: this.name,
+      email: this.email,
+      age: this.age,
+      password: this.password,
+      confirm_password: this.confirm_password,
+    },
+    [RegisterValidators.match]
+  );
 
   alertMessage = 'Please wait. Your account is being created.';
   showAlert = false;
