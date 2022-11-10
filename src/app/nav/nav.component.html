@@ -1,9 +1,7 @@
 <header class="bg-secondary" id="header">
   <nav class="container flex items-center justify-start px-4 py-8 mx-auto">
     <!-- App Name -->
-    <a
-      class="mr-4 text-3xl font-bold text-indigo-400 uppercase"
-      href="index.html"
+    <a class="mr-4 text-3xl font-bold text-indigo-400 uppercase" routerLink="/"
       >Clipz</a
     >
 
@@ -24,12 +22,12 @@
             <a class="px-2" href="#">Upload</a>
           </li>
           <li>
-            <a class="px-2" href="about.html">About</a>
+            <a class="px-2" routerLink="/about">About</a>
           </li>
           <li><a class="px-2" (click)="logout($event)">Logout</a></li>
         </ng-template>
         <li>
-          <a class="px-2" href="about.html">About</a>
+          <a class="px-2" routerLink="/about">About</a>
         </li>
       </ul>
       <!-- Language Switcher -->
