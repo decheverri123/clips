@@ -6,7 +6,10 @@
     >
 
     <!-- Sort Videos -->
-    <select class="px-8 text-xl text-black outline-none appearance-none">
+    <select
+      class="w-full max-w-xs text-black select select-bordered"
+      (change)="sort($event)"
+    >
       <option value="1">Recent Uploads</option>
       <option value="2">Oldest Uploads</option>
     </select>

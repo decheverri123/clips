@@ -1,20 +1,26 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { UserModule } from './user/user.module';
-import { NavComponent } from './nav/nav.component';
-import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { HomeComponent } from './home/home.component';
+import { environment } from '../environments/environment';
 import { AboutComponent } from './about/about.component';
-import { VideoModule } from './video/video.module';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { ClipComponent } from './clip/clip.component';
+import { HomeComponent } from './home/home.component';
+import { NavComponent } from './nav/nav.component';
+import { UserModule } from './user/user.module';
+import { VideoModule } from './video/video.module';
 @NgModule({
-  declarations: [AppComponent, NavComponent, HomeComponent, AboutComponent, ClipComponent],
+  declarations: [
+    AppComponent,
+    NavComponent,
+    HomeComponent,
+    AboutComponent,
+    ClipComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
