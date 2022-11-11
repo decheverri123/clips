@@ -27,7 +27,7 @@
         <p>
           {{ alertMessage }}
         </p>
-        <p>
+        <p *ngIf="showPercentage">
           {{ percentage | percent }}
         </p>
       </app-alert>
