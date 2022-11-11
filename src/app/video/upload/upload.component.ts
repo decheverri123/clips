@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-upload',
@@ -10,6 +11,14 @@ export class UploadComponent implements OnInit {
   file: File | null = null;
   nextStep = false;
 
+  title = new FormControl('', {
+    validators: [Validators.required, Validators.minLength(3)],
+    nonNullable: true,
+  });
+  uploadForm = new FormGroup({
+    title: this.title,
+  });
+
   constructor() {}
 
   ngOnInit(): void {}
@@ -17,9 +26,16 @@ export class UploadComponent implements OnInit {
   storeFile($event: Event) {
     this.isDragover = false;
     this.file = ($event as DragEvent).dataTransfer?.files.item(0) ?? null;
+
     if (!this.file || this.file.type !== 'video/mp4') {
       return;
     }
+
+    this.title.setValue(this.file.name.replace(/\.[^/.]+$/, ''));
     this.nextStep = true;
+  }
+
+  uploadFile() {
+    console.log('File uploaded');
   }
 }
