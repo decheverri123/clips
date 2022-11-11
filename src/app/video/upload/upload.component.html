@@ -7,6 +7,15 @@
     <div
       class="w-full px-10 py-40 text-xl text-center transition duration-500 border border-gray-400 border-dashed rounded cursor-pointer hover:text-white hover:bg-indigo-400 hover:border-indigo-400 hover:border-solid"
       app-event-blocker
+      (dragend)="isDragover = false"
+      (dragover)="isDragover = true"
+      (dragenter)="isDragover = true"
+      (dragleave)="isDragover = false"
+      (mouseleave)="isDragover = false"
+      (drop)="storeFile($event)"
+      [ngClass]="{
+        'bg-indigo-400 border-indigo-400 border-solid': isDragover
+      }"
     >
       <h5>Drop your file here (mp4 only!)</h5>
     </div>
