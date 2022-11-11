@@ -1,16 +1,15 @@
 import {
   Component,
-  Input,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
-  Output,
   EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
 } from '@angular/core';
-import { ModalService } from '../../services/modal.service';
-import IClip from '../../models/clip.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import IClip from '../../models/clip.model';
 import { ClipService } from '../../services/clip.service';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-edit',
