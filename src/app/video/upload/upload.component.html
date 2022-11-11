@@ -23,6 +23,11 @@
 
     <!-- Video Editor -->
     <ng-template #uploadFormContainer="">
+      <app-alert *ngIf="showAlert" [color]="alertColor">
+        <p>
+          {{ alertMessage }}
+        </p>
+      </app-alert>
       <!-- Form -->
       <form [formGroup]="uploadForm" (ngSubmit)="uploadFile()">
         <!-- Screenshots -->
@@ -47,8 +52,13 @@
 
         <div class="mt-4 text-right">
           <button
-            class="inline-flex justify-center px-4 py-2 text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none"
+            class="inline-flex justify-center px-4 py-2 text-white bg-indigo-600 border border-transparent rounded-md shadow-sm focus:outline-none"
             type="submit"
+            [disabled]="inSubmission"
+            [ngClass]="{
+              'opacity-50': inSubmission,
+              'hover:bg-indigo-700': !inSubmission
+            }"
           >
             Publish
           </button>
