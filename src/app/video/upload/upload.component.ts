@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFireStorage,
   AngularFireUploadTask,
 } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 import { last, switchMap } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { ClipService } from '../../services/clip.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload',
@@ -96,6 +96,7 @@ export class UploadComponent implements OnDestroy {
             title: this.title.value,
             fileName: `${clipFileName}.mp4`,
             url,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
           };
 
           const clipDocRef = await this.clipsService.createClip(clip);
