@@ -10,6 +10,7 @@ import firebase from 'firebase/compat/app';
 import { last, switchMap } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { ClipService } from '../../services/clip.service';
+import { FfmpegService } from '../../services/ffmpeg.service';
 
 @Component({
   selector: 'app-upload',
@@ -36,14 +37,17 @@ export class UploadComponent implements OnDestroy {
   uploadForm = new FormGroup({
     title: this.title,
   });
+  // uploadEditorContainer: TemplateRef<NgIfContext<boolean>> | null;
 
   constructor(
     private storage: AngularFireStorage,
     private auth: AngularFireAuth,
     private clipsService: ClipService,
-    private router: Router
+    private router: Router,
+    public ffmpegService: FfmpegService
   ) {
     auth.user.subscribe((user) => (this.user = user));
+    this.ffmpegService.init();
   }
 
   ngOnDestroy(): void {
