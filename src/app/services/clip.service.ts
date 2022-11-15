@@ -9,12 +9,15 @@ import {
 import { map, of, switchMap, BehaviorSubject, combineLatest } from 'rxjs';
 import IClip from '../models/clip.model';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { idTokenResult } from '@angular/fire/compat/auth-guard';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClipService {
   public clipsCollection: AngularFirestoreCollection<IClip>;
+  pageClips: IClip[] = [];
+  pendingRequest = false;
 
   constructor(
     private db: AngularFirestore,
@@ -54,5 +57,36 @@ export class ClipService {
     const clipRef = this.storage.ref(`clips/${clip.fileName}`);
     await clipRef.delete();
     await this.clipsCollection.doc(clip.docID).delete();
+  }
+
+  async getClips() {
+    if (this.pendingRequest) {
+      return;
+    }
+
+    this.pendingRequest = true;
+    let query = this.clipsCollection.ref.orderBy('timestamp', 'desc').limit(6);
+
+    const { length } = this.pageClips;
+
+    if (length) {
+      const lastDocumentID = this.pageClips[length - 1].docID;
+      const lastDoc = await this.clipsCollection
+        .doc(lastDocumentID)
+        .get()
+        .toPromise();
+      query = query.startAfter(lastDoc);
+    }
+
+    const snapshot = await query.get();
+
+    snapshot.forEach((doc) => {
+      this.pageClips.push({
+        docID: doc.id,
+        ...doc.data(),
+      });
+    });
+
+    this.pendingRequest = false;
   }
 }
