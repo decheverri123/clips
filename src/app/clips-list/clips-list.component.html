@@ -1,13 +1,14 @@
 <!-- Clips List -->
 <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
   <a
-    *ngFor="let clip of clipService.pageClips"
     class="mt-6 transition duration-300 transform shadow-xl rounded-tl-2xl rounded-br-2xl bg-secondary hover:-translate-y-2 hover:shadow-2xl"
+    *ngFor="let clip of clipService.pageClips"
     [routerLink]="['/', 'clip', clip.docID]"
   >
     <!-- Image -->
     <img
       class="w-full card-img-top rounded-tl-2xl"
+      crossorigin
       src="../../assets/Eric Costume.jpeg"
     />
 
@@ -33,12 +34,6 @@
     <div class="p-8">
       <!-- Heading -->
       <h2 class="mb-2 text-3xl">{{ clip.title }}</h2>
-
-      <!-- Name & Date -->
-      <p class="mb-0">
-        {{ clip.fileName }} &#183;
-        <span class="text-gray-400">March 31, 2020</span>
-      </p>
     </div>
   </a>
 </div>
