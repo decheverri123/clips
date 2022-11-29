@@ -4,9 +4,9 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map, Observable, of, switchMap } from 'rxjs';
 import IUser from '../models/user.model';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
