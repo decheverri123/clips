@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ClipService } from '../services/clip.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-clips-list',
   templateUrl: './clips-list.component.html',
   styleUrls: ['./clips-list.component.css'],
+  providers: [DatePipe],
 })
 export class ClipsListComponent implements OnInit, OnDestroy {
   constructor(public clipService: ClipService) {
@@ -32,6 +34,7 @@ export class ClipsListComponent implements OnInit, OnDestroy {
     // trigger when user reaches bottom of page
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
       this.clipService.getClips();
+      console.log('bottom reached');
     }
   };
 }
