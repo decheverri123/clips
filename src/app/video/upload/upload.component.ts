@@ -7,7 +7,7 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
-import { last, switchMap } from 'rxjs';
+import { last, switchMap, combineLatest } from 'rxjs';
 import { FfmpegService } from 'src/app/services/ffmpeg.service';
 import { v4 as uuid } from 'uuid';
 import { ClipService } from '../../services/clip.service';
@@ -98,9 +98,20 @@ export class UploadComponent implements OnDestroy {
     this.task = this.storage.upload(clipPath, this.file);
     const clipRef = this.storage.ref(clipPath);
 
-    this.task.percentageChanges().subscribe((progress) => {
-      this.percentage = (progress as number) / 100;
+    combineLatest([
+      this.task.percentageChanges(),
+      this.screenshotTask.percentageChanges(),
+    ]).subscribe((progress) => {
+      const [clipProgress, screenshotProgress] = progress;
+
+      if (!clipProgress || !screenshotProgress) {
+        return;
+      }
+      const total = clipProgress + screenshotProgress;
+
+      this.percentage = (total as number) / 200;
     });
+
     this.task
       .snapshotChanges()
       .pipe(
