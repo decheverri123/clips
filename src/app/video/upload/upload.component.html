@@ -12,7 +12,7 @@
       </span>
     </ng-container>
 
-    <ng-template #uploadEditorContainer>
+    <ng-template #uploadEditorContainer="">
       <!-- Upload Dropbox -->
       <ng-container *ngIf="!nextStep; else uploadFormContainer">
         <div
@@ -29,6 +29,12 @@
           }"
         >
           <h5>Drop your file here (mp4 only!)</h5>
+          <span
+            class="p-8 text-6xl text-center material-icons animate-spin"
+            *ngIf="ffmpegService.isRunning"
+          >
+            autorenew
+          </span>
         </div>
         <input class="mt-4" type="file" (change)="storeFile($event)" />
       </ng-container>
@@ -49,8 +55,8 @@
           <h2 class="mb-4 text-xl">Select a Thumbnail</h2>
           <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
             <div
-              *ngFor="let screenshot of screenshots"
               class="border-8 border-green-400 cursor-pointer"
+              *ngFor="let screenshot of screenshots"
             >
               <img [src]="screenshot | safeURL" />
             </div>
