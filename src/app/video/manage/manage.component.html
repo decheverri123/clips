@@ -28,15 +28,19 @@
       <a href="#">
         <img
           class="w-full card-img-top rounded-tl-2xl"
-          src="assets/img/1.jpg"
+          [src]="clip.screenshotURL"
+          crossorigin
         />
       </a>
 
       <!-- Body -->
       <div class="p-6 text-2xl">
         <!-- Link -->
-        <a class="mb-2 font-bold" href="#"> {{ clip.title }} </a>
+        <a class="mb-2 font-bold" [routerLink]="['/', 'clip', clip.docID]">
+          {{ clip.title }}
+        </a>
         <a
+          (click)="copyToClipboard($event, clip.docID)"
           class="px-2 py-1 ml-2 text-sm text-white bg-gray-400 rounded"
           href="#"
         >
