@@ -30,15 +30,6 @@ export class ClipsListComponent implements OnInit, OnDestroy {
   }
 
   handleScroll = () => {
-    // const { scrollTop, offsetHeight } = document.documentElement;
-    // const { innerHeight } = window;
-
-    // const bottomOfWindow = Math.round(scrollTop) + innerHeight === offsetHeight;
-
-    // if (bottomOfWindow) {
-    //   console.log('bottom of window');
-    // }
-
     // trigger when user reaches bottom of page
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
       this.clipService.getClips();
